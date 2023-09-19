@@ -126,6 +126,11 @@ form button:hover {
     left: 1rem;
     border:1px splid black;
 }
+.page-not-found{
+    text-align: center;
+    height="700";
+    width="700";
+}
 
 .buttons li {
     margin-left: 2rem;

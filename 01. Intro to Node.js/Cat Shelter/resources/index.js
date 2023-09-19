@@ -1,7 +1,6 @@
 const http = require('http');
 const fs = require('fs/promises');
-const siteCss =  require('./content/styles/site')
-
+const siteCss = require('./content/styles/site')
 
 const cats = [
     {
@@ -44,19 +43,19 @@ const server = http.createServer(async (req, res) => {
         const homeHtml = await fs.readFile('./views/home/index.html', 'utf-8');
         const catHtml = await fs.readFile('./views/cat.html', 'utf-8');
 
-        
+
         const catsHtml = cats.map(cat => {
             let result = catHtml;
 
             Object.keys(cat).forEach(key => {
-                result = result.replace(`{{${key}}}`, cat[key])
+                result = result.replaceAll(`{{${key}}}`, cat[key])
             })
 
             return result;
         }).join('');
 
         const homeResult = homeHtml.replace('{{cats}}', catsHtml)
-        
+
         res.writeHead(200, {
             'Content-Type': 'text/html'
         })
@@ -68,20 +67,28 @@ const server = http.createServer(async (req, res) => {
         })
         res.write(siteCss);
 
-    } else if( req.url == '/cats/add-breed'){
+    } else if (req.url == '/cats/add-breed') {
         const addBreedHtml = await fs.readFile('./views/addBreed.html', 'utf-8');
 
         res.writeHead(200, {
             'Content-Type': 'text/html'
         })
-        res.write(addBreedHtml); 
+        res.write(addBreedHtml);
 
 
-    }else if( req.url == '/cats/add-cat'){
+    } else if (req.url == '/cats/add-cat') {
+        const addCatHtml = await fs.readFile('./views/addCat.html', 'utf-8');
         res.writeHead(200, {
             'Content-Type': 'text/html'
         })
         res.write(addCatHtml);
+
+    } else  {
+        const page404Html = await fs.readFile('./views/page404.html', 'utf-8');
+        res.writeHead(200, {
+            'Content-Type': 'text/html'
+        })
+        res.write(page404Html)
     }
 
     res.end();
