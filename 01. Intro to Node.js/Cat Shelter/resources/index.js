@@ -1,6 +1,6 @@
 const http = require('http');
 const fs = require('fs/promises');
-const siteCss = require('./content/styles/site')
+
 
 const cats = [
     {
@@ -62,6 +62,7 @@ const server = http.createServer(async (req, res) => {
         res.write(homeResult);
 
     } else if (req.url == '/content/styles/site.css') {
+        const siteCss = await fs.readFile('./content/styles/site.css')
         res.writeHead(200, {
             'Content-Type': 'text/css'
         })
