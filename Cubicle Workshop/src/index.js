@@ -1,10 +1,12 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const path = require('path');
+
 
 const PORT = 5000;
 const app = express();
 
-app.use(express.static('static'));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 // handelbars setup:
 app.engine('hbs', handlebars.engine({
