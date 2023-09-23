@@ -2,9 +2,12 @@ const router =  require('express').Router();
 const cubeServices = require('../services/cubeServices');
 
 router.get ('/', (req, res)=>{
-    const cubes = cubeServices.getAll();
+    const { search, from, to} = req.query;
 
-    res.render('index', {cubes})
+
+    const cubes = cubeServices.getAll(search, from, to);
+
+    res.render('index', {cubes, search, from, to})
 });
 
 router.get('/about', (req, res) =>{
