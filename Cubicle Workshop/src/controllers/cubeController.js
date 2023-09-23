@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-
 const cubeServices = require('../services/cubeServices');
 
 // Path = /cubes/create
