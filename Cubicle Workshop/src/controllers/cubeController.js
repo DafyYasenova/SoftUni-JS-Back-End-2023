@@ -6,14 +6,21 @@ const cubeServices = require('../services/cubeServices');
 router.get('/create', (req, res) => {
     console.log(cubeServices.getAll());
     res.render('create');
-}); 
+});
 
 router.post('/create', (req, res) => {
     const { name, description, imageUrl, difficultyLevel } = req.body;
 
     cubeServices.create({
-        name, description, imageUrl, difficultyLevel: Number(difficultyLevel)});
+        name, description, imageUrl, difficultyLevel: Number(difficultyLevel)
+    });
 
-    res.redirect('/')
+    res.redirect('/');
 })
+
+router.get('/:cubeId/details', (req, res) => {
+    const cube = cubeServices.getOne(req.params.cubeId);
+    res.render('details', { cube });
+});
+
 module.exports = router;
