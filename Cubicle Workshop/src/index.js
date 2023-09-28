@@ -6,6 +6,7 @@ const dbConnect = require('./config/dbConfig');
 
 const homeController = require('./controllers/homeController');
 const cubeController = require('./controllers/cubeController');
+const accessoryController =  require('./controllers/accessoryController')
 
 const PORT = 5000;
 const app = express();
@@ -19,6 +20,7 @@ handlebarsConfig(app);
 
 app.use(homeController);
 app.use('/cubes', cubeController);
+app.use('/accessories', accessoryController);
 
 app.get('*', (req, res)=>{
     res.redirect('/404');
