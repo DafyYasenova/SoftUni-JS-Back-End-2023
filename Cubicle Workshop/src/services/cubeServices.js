@@ -17,12 +17,24 @@ exports.getAll = async (search, from, to) => {
     }
 
     if (from) {
-findCubes = findCubes.filter(cube => cube.difficultyLevel >= Number(from));
+        findCubes = findCubes.filter(cube => cube.difficultyLevel >= Number(from));
     }
 
     if (to) {
-findCubes = findCubes.filter(cube => cube.difficultyLevel <= Number(to));
+        findCubes = findCubes.filter(cube => cube.difficultyLevel <= Number(to));
     }
     return findCubes;
 }
 exports.getOne = (cubeId) => Cube.findById(cubeId) //lean();
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+
+    const cube = await Cube.findById(cubeId);
+    cube.accessories.push(accessoryId);
+
+    return cube.save();
+
+    // 2 way: 
+    return Cube.findByIdAndUpdate(cubeId, { $push: { accessories: accessoryId } })
+
+}
