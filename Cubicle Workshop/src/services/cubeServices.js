@@ -25,7 +25,7 @@ exports.getAll = async (search, from, to) => {
     }
     return findCubes;
 }
-exports.getOne = (cubeId) => Cube.findById(cubeId) //lean();
+exports.getOne = (cubeId) => Cube.findById(cubeId).populate('accessories');  //lean();
 
 exports.attachAccessory = async (cubeId, accessoryId) => {
 
