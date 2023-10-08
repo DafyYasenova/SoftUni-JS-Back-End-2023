@@ -7,6 +7,7 @@ const accessoryServices = require('../services/accessoryServices');
 // Path = /cubes/create
 router.get('/create', (req, res) => {
     // console.log(cubeServices.getAll());
+    console.log(req.user)
     res.render('create');
 });
 
