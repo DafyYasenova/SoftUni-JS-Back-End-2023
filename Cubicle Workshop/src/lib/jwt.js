@@ -1,9 +1,9 @@
-const util = require('util');
+const { promisify } = require('util');
 const jsonwebtoken =  require('jsonwebtoken');
 
 const jwt = {
-sign: util.promisify(jsonwebtoken.sign),
-verify: util.promisify(jsonwebtoken.verify),
+sign: promisify(jsonwebtoken.sign),
+verify: promisify(jsonwebtoken.verify),
 };
 
 module.exports = jwt;

@@ -7,7 +7,7 @@ const accessoryServices = require('../services/accessoryServices');
 // Path = /cubes/create
 router.get('/create', (req, res) => {
     // console.log(cubeServices.getAll());
-    console.log(req.user)
+
     res.render('create');
 });
 
@@ -15,7 +15,11 @@ router.post('/create', async (req, res) => {
     const { name, description, imageUrl, difficultyLevel } = req.body;
 
     await cubeServices.create({
-        name, description, imageUrl, difficultyLevel: Number(difficultyLevel)
+        name,
+        description,
+        imageUrl,
+        difficultyLevel: Number(difficultyLevel),
+        owner: req.user._id,
     });
 
     res.redirect('/');
