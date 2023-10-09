@@ -9,6 +9,10 @@ exports.create = async (cubeData) => {
     return cube;
 }
 
+exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId);
+
+exports.update = (cubeId, cubeData) => Cube.findByIdAndUpdate(cubeId, cubeData);
+
 exports.getAll = async (search, from, to) => {
     let findCubes = await Cube.find().lean();
 
