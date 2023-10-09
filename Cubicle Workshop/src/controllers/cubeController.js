@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const cubeServices = require('../services/cubeServices');
 const accessoryServices = require('../services/accessoryServices');
+const { getDifficultyOptions } = require('../utils/viewHelpers');
 
 
 // Path = /cubes/create
@@ -55,7 +56,8 @@ router.post('/:cubeId/attach-accessory', async (req, res) => {
 
 router.get(`/:cubeId/delete`, async (req, res) => {
     const cube = await cubeServices.getOne(req.params.cubeId).lean();
-    res.render('cubes/delete', { cube });
+   const options = getDifficultyOptions(cube.difficultyLevel)
+    res.render('cubes/delete', { cube , options});
 });
 
 router.post('/:cubeId/delete', async (req, res) => {
@@ -65,23 +67,7 @@ router.post('/:cubeId/delete', async (req, res) => {
 });
 
 
-function getDifficultyOptions(difficultyLevel) {
-    const titles = [
-        'Very Easy',
-        'Easy',
-        'Medium (Standard 3x3)',
-        'Intermediate',
-        'Expert',
-        'Hardcore',
-    ];
-    const options = titles.map((title, index) => ({
-        title: `${index + 1} - ${title}`,
-        value: index + 1,
-        selected: Number(difficultyLevel) == index + 1
-    }));
 
-    return options;
-}
 router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeServices.getOne(req.params.cubeId).lean();
 
