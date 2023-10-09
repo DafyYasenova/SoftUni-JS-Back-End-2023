@@ -8,7 +8,7 @@ const accessoryServices = require('../services/accessoryServices');
 router.get('/create', (req, res) => {
     // console.log(cubeServices.getAll());
 
-    res.render('create');
+    res.render('cubes/create');
 });
 
 router.post('/create', async (req, res) => {
@@ -31,7 +31,7 @@ router.get('/:cubeId/details', async (req, res) => {
     if (!cube) {
         return res.redirect('/404');
     }
-    res.render('details', { cube });
+    res.render('cubes/details', { cube });
 });
 
 
@@ -53,5 +53,9 @@ router.post('/:cubeId/attach-accessory', async (req, res) => {
 
 });
 
+router.get(`/:cubeId/delete`, async (req, res) => {
+    const cube = await cubeServices.getOne(req.params.cubeId).lean();
+    res.render('cubes/delete', { cube });
+});
 module.exports = router;
 
