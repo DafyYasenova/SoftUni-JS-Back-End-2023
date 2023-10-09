@@ -32,7 +32,10 @@ router.get('/:cubeId/details', async (req, res) => {
     if (!cube) {
         return res.redirect('/404');
     }
-    res.render('cubes/details', { cube });
+
+    const isOwner = cube.owner?.toString() === req.user._id;
+    console.log(isOwner)
+    res.render('cubes/details', { cube, isOwner });
 });
 
 
@@ -56,8 +59,8 @@ router.post('/:cubeId/attach-accessory', async (req, res) => {
 
 router.get(`/:cubeId/delete`, async (req, res) => {
     const cube = await cubeServices.getOne(req.params.cubeId).lean();
-   const options = getDifficultyOptions(cube.difficultyLevel)
-    res.render('cubes/delete', { cube , options});
+    const options = getDifficultyOptions(cube.difficultyLevel)
+    res.render('cubes/delete', { cube, options });
 });
 
 router.post('/:cubeId/delete', async (req, res) => {
@@ -72,7 +75,7 @@ router.get('/:cubeId/edit', async (req, res) => {
     const cube = await cubeServices.getOne(req.params.cubeId).lean();
 
     const options = getDifficultyOptions(cube.difficultyLevel);
-    res.render('cubes/edit', { cube, options});
+    res.render('cubes/edit', { cube, options });
 });
 
 router.post('/:cubeId/edit', async (req, res) => {
