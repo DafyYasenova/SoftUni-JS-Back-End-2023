@@ -10,9 +10,13 @@ router.post('/register', async (req, res) => {
 
     const { username, password, repearPassword } = req.body;
 
-    await userServices.register({ username, password, repearPassword });
+    try {
+        await userServices.register({ username, password, repearPassword });
 
-    res.redirect('/users/login');
+        res.redirect('/users/login');
+    } catch (error) {
+        res.status(404).render('users/register', {errorMessage: error.message})
+    }
 });
 
 router.get('/login', (req, res) => {
@@ -23,14 +27,14 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     const token = await userServices.login(username, password);
-  
-    res.cookie('auth', token, {httpOnly: true});
+
+    res.cookie('auth', token, { httpOnly: true });
 
     res.redirect('/');
 
 });
 
-router.get('/logout', (req, res) =>{
+router.get('/logout', (req, res) => {
     res.clearCookie('auth');
     res.redirect('/');
 })
