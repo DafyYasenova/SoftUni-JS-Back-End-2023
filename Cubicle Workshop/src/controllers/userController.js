@@ -15,11 +15,13 @@ router.post('/register', async (req, res) => {
 
         res.redirect('/users/login');
     } catch (error) {
-        res.status(404).render('users/register', {errorMessage: error.message})
+        const firstErrorMsg = Object.values(error.errors)[0].message;
+        console.log(firstErrorMsg)
+        res.status(404).render('users/register', {errorMessage: firstErrorMsg})
     }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', (req, res) => { 
     res.render('users/login');
 });
 

@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
 userSchema.virtual('repeatPassword')
 .set(function(value){
     if(value !== this.password){
-        throw new mongoose.MongooseError('Password don\'t match!')
+        throw new Error('Password don\'t match!')
     }
 });
 
