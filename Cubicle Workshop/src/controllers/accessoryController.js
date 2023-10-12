@@ -7,9 +7,18 @@ router.get('/create', (req, res) => {
 
 router.post('/create', async (req, res) => {
     const { name, description, imageUrl } = req.body;
-    await accessoryServices.create({ name, description, imageUrl });
+    try {
+        await accessoryServices.create({ name, description, imageUrl });
+
+        res.redirect('/');
+
+    } catch (error) {
+        console.log('current error: ', error)
+        const firstErrorMsg = Object.values(error.errors)[0].message;
+        console.log(firstErrorMsg)
+        res.status(404).render('accessory/create',{ errorMessage: firstErrorMsg })
+    }
 
 
-    res.redirect('/');
 })
 module.exports = router;  
