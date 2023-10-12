@@ -13,12 +13,12 @@ router.post('/create', async (req, res) => {
         res.redirect('/');
 
     } catch (error) {
-        console.log('current error: ', error)
+
         const firstErrorMsg = Object.values(error.errors)[0].message;
         console.log(firstErrorMsg)
-        res.status(404).render('accessory/create',{ errorMessage: firstErrorMsg })
+        res.status(404).render('accessory/create', { errorMessage: firstErrorMsg })
     }
 
+});
 
-})
 module.exports = router;  
