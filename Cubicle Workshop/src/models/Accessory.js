@@ -14,7 +14,11 @@ const accessorySchema = new mongoose.Schema({
         minLength: [5, 'Description is it should be more 20 characters!'],
         match: [/^[A-Za-z0-9 ]+$/, 'Name must be alphanumeric!'],
     },
-    imageUrl: String,
+    imageUrl: {
+        type: String,
+        required: true,
+    
+    },
 });
 
 const Accessory = mongoose.model('Accessory', accessorySchema);
