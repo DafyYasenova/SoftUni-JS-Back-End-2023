@@ -2,12 +2,19 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
 
+const mongoose = require('mongoose');
 const PORT = 3000;
 
 const routes = require('./routes');
 
 
 const app = express();
+
+mongoose.connect('mongodb://127.0.0.1:27017/petstargam')
+.then(() => console.log('DB Connect successfully!'))
+.catch(err => console.log('DB Error:', err.message));
+
+
 app.engine('hbs', handlebars.engine({extname: 'hbs'}));
 
 app.set('view engine', 'hbs');

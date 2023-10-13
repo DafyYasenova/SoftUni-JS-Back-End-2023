@@ -20,3 +20,6 @@
     - render home page and fix path in home.hbs
     - fix static paths
 7. Add controllers folder with home controller
+8. Add DB
+    - install mongoose
+    - connect to DB
