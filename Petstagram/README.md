@@ -30,3 +30,14 @@
     - fix header navigation to login, register and logout
     - render login page
     - render register page
+10. Add user model
+    - add unique index for username
+    * validate password and repeat password
+11. Edit login and register forms
+12. Add post actions for login and register
+13. Add user services
+    - require user in userController
+    - add register methods
+    - add login methods
+    * validate if user exists
+14. Create user login and register
