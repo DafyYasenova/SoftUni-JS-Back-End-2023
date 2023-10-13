@@ -18,8 +18,15 @@
     - config views folder
     - add main layout
     - render home page and fix path in home.hbs
+    - fix navigation to home page
     - fix static paths
 7. Add controllers folder with home controller
 8. Add DB
     - install mongoose
     - connect to DB
+9. Authentication
+    - add user controller
+    - add controller to routes
+    - fix header navigation to login, register and logout
+    - render login page
+    - render register page
