@@ -1,9 +1,35 @@
+const jwt = require('../lib/jwt');
 const User = require('../models/User');
+const { SECRET } =  require('../config/constans')
 
-exports.login = (username, password) => {
 
-};
 
+const bcrypt = require('bcrypt');
+
+
+exports.login = async (username, password) => {
+
+    const user =  await User.findOne({ username});
+
+    if (!user){
+        throw new Error ('Invalid user or password');
+    }
+
+    const isValid = await bcrypt.compare(password, user.password);
+
+    if (!isValid){
+        throw new Error ('Invalid user or password');
+    }
+
+    const payload = {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+    };
+
+    const token = await jwt.sign(payload, SECRET, { expiresIn: '2d'});
+    return token;
+}
 exports.register = async (userData) => {
 
     const user = await User.findOne({ username: userData.username });

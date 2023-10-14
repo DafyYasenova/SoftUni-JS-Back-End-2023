@@ -1,10 +1,12 @@
+const { PORT }  = require('./config/constans');
+
 const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
-
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const PORT = 3000;
 
+const { auth } = require('./middlewares/authMiddleware');
 const routes = require('./routes');
 
 
@@ -23,7 +25,8 @@ app.set('views', 'src/views');
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
-
+app.use(cookieParser());
+app.use(auth); // required after cookieParser!
 app.use(routes);
 
 
