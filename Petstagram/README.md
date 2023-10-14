@@ -21,25 +21,50 @@
     - fix navigation to home page
     - fix static paths
 7. Add controllers folder with home controller
-8. Add DB
+8. Create congig folder with constants file
+9. Add DB
     - install mongoose
     - connect to DB
-9. Authentication
+10. Authentication
     - add user controller
     - add controller to routes
     - fix header navigation to login, register and logout
     - render login page
     - render register page
-10. Add user model
+11. Add user model
     - add unique index for username
     - validate password and repeat password
-11. Edit login and register forms
-12. Add post actions for login and register
-13. Add user services
+12. Edit login and register forms
+13. Add post actions for login and register
+14. Add user services
     - require user in userController
     - add register methods
     - add login methods
     - validate if user exists
-14. Hash password
+15. Hash password
     - install bcrypt
     - make hash password
+16. Login
+    - find user by username
+    - validate hash password
+17. Generate jsonwebtoken
+    - install jsonwebtoken
+    - promisify jwt
+    - create secret
+    - generate token in services login
+18. Return token in cookie
+    - install cookie-parser
+    - config cookie-parser
+    - set cookie with token
+19. Logout
+20. Authentication middleware
+    - create base middleware
+    - use middleware
+    - implement auth middleware
+    - attach decoded token to request
+    - handle invalid token
+21. Authorization middleware
+22. Add dynamic navigation bar
+    - add conditional in main layout
+    - add isAuthenticated property in res.locals
+23. Error handler
