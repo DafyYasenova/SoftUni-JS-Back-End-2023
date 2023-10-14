@@ -68,3 +68,5 @@
     - add conditional in main layout
     - add isAuthenticated property in res.locals
 23. Error handler
+    - add 404 page
+    - redirect missing route to 404 page
