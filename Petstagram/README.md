@@ -86,3 +86,5 @@
 29. Add photoController
     - import photoController in routes and use 
 30. Modify catalog template and route in photoController
+31. Create getAll method for populate data
+32. Details page
