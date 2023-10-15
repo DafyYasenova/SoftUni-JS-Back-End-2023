@@ -11,6 +11,13 @@
 <!-- Starts Body Section -->
 
 <body>
+    {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
+        </div>
+    </div>
+    {{/if}}
 
     <!-- Starts Header Section with Navigation Bar -->
     <header>
@@ -74,9 +81,6 @@
                             </a>
                         </li>
                         {{/if}}
-
-
-
                     </ul>
                 </div>
             </div>

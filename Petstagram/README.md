@@ -70,3 +70,8 @@
 23. Error handler
     - add 404 page
     - redirect missing route to 404 page
+    - add error message extractor
+24. Show error notification
+    - add error container to main layout
+    - show error container conditionally
+    - pass error to render
