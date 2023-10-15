@@ -31,7 +31,7 @@
                                             alt="edit button">
                                     </a>
 
-                                    <a href="#">
+                                    <a href="/photos/{{photo._id}}/delete">
                                         <img class="bin-img" src="/images/icon-remove-22.jpg" alt="bin button">
                                     </a>
                                 </div>
@@ -108,6 +108,8 @@
                             </div>
                         </div>
                     </div>
+                    {{#if isAuthenticated}}
+                    {{#unless isOwner}}
                     <div class="addComments">
                         <!-- Start Add Comments Form -->
                         <form method="#" action="#">
@@ -117,6 +119,8 @@
                             <button type="submit">Post</button>
                         </form>
                     </div>
+                    {{/unless}}
+                    {{/if}}
                 </div>
             </div>
         </div>
