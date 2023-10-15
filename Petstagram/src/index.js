@@ -4,7 +4,8 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const mongoose = require('mongoose');
+
+const dbConnect = require('./config/dbConfig')
 
 const { auth } = require('./middlewares/authMiddleware');
 const routes = require('./routes');
@@ -12,7 +13,7 @@ const routes = require('./routes');
 
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/petstargam')
+dbConnect()
 .then(() => console.log('DB Connect successfully!'))
 .catch(err => console.log('DB Error:', err.message));
 
