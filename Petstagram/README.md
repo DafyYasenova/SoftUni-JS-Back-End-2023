@@ -75,3 +75,4 @@
     - add error container to main layout
     - show error container conditionally
     - pass error to render
+25. Automatically login after register (optional)
