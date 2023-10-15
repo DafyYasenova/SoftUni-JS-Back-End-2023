@@ -76,3 +76,12 @@
     - show error container conditionally
     - pass error to render
 25. Automatically login after register (optional)
+26. Add photo model
+27. Add folder photos in views with create file
+28. Add create page 'add photo'
+    - modify create.hbs
+    - add method 'POST' in the form
+    - add name atributes in the form
+    - fix addPhoto path in main.hbs 
+29. Add photoController
+    - import photoController in routes and use 
