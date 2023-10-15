@@ -4,13 +4,17 @@ const photoServices = require('../services/photoServices');
 
 const { extractErrorMessage} = require('../utils/errorHelpers');
 
-router.get('/catalog', (req, res) =>{
-    res.render('photos/catalog')
+router.get('/catalog', async (req, res) =>{
+
+    const photos = await photoServices.getAll().lean();
+
+    res.render('photos/catalog', {photos});
 })
 
 router.get('/create', (req, res) => {
 
     res.render('photos/create');
+   // res.redirect('/photos/catalog')
 
 });
 
@@ -21,7 +25,7 @@ router.post('/create', async (req, res) => {
     try {
 
         await photoServices.create(photoData);
-        res.redirect('/photos');
+        res.redirect('/photos/catalog');
 
     } catch (error) {
         res.render('photos/create', { error: extractErrorMessage(error)});
