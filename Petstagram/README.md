@@ -85,3 +85,4 @@
     - fix addPhoto path in main.hbs 
 29. Add photoController
     - import photoController in routes and use 
+30. Modify catalog template and route in photoController
