@@ -86,7 +86,7 @@ router.post('/:photoId/comments', async (req, res) => {
         await photoServices.addComment(photoId, { user, message });
         res.redirect(`/photos/${photoId}/details`);
     } catch (error) {
-        console.log('try again')
+        res.render(`photos/${photoId}/details`, { error: extractErrorMessage(error) })
     }
 });
 

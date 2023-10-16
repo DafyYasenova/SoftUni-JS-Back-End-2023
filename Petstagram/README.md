@@ -91,3 +91,7 @@
     - conditionality for text area for post comments
 33. Delete functionality
 34. Edit page
+35. Add comments to post
+36. Create profile page
+    - fix path in main layout
+    - add route in the home controller
