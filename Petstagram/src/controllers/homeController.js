@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const photoServices = require('../services/photoServices'); // for profile 
+const { isAuth } = require('../middlewares/authMiddleware');
 
 router.get('/', (req, res) => {
    // console.log(req.user)
@@ -11,7 +12,7 @@ router.get('/404', (req, res) => {
     res.render('404');
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', isAuth, async (req, res) => {
     const photos = await photoServices.getByOwner(req.user._id).lean();
 
 

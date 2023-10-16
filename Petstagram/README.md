@@ -95,3 +95,7 @@
 36. Create profile page
     - fix path in main layout
     - add route in the home controller
+    - render profile page with current user data
+37. Add validation in user and photo models
+38. Routes guards in home and photo controllers
+    - import and use isAuth middleware
