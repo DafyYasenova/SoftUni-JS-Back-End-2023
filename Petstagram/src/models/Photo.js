@@ -9,26 +9,31 @@ const photoSchema =  new mongoose.Schema({
     image: {
         type: String,
         required: [true, 'ImageURL is required!'],
-        match: ['/^https?:\/\/||^http:\/\//', 'ImageUrl should be a valid url']
+        validate: {
+            validator(value){
+                return /^https?:\/\/.+$/.test(value);
+            },
+            message: 'Image should be start with http:// ot https://!'
+        }
     },
     age: {
         type: Number,
         required: [true, 'Age is required!'],
         minLength: [1, 'Age should be more 0!'],
-        maxLength: [1, 'Age should be least 100!'],
+        maxLength: [100, 'Age should be least 100!'],
     },
     description: {
         type: String,
         required: [true, 'Description is required!'],
-        minLength: [1, 'Description should be more 5 characters!'],
-        maxLength: [1, 'Description should be least 50 characters!'],
+        minLength: [5, 'Description should be more 5 characters!'],
+        maxLength: [50, 'Description should be least 50 characters!'],
 
     },
     location: {
         type: String,
         required: [true, 'Location is required!'],
-        minLength: [1, 'Location should be more 5 characters!'],
-        maxLength: [1, 'Location should be least 50 characters!'],
+        minLength: [5, 'Location should be more 5 characters!'],
+        maxLength: [50, 'Location should be least 50 characters!'],
     }, 
     owner: {
         type: mongoose.Types.ObjectId,
