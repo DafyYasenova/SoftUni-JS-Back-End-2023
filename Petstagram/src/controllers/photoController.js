@@ -35,9 +35,10 @@ router.post('/create', async (req, res) => {
 
 router.get('/:photoId/details', async (req, res) => {
     const photoId = req.params.photoId;
-    const photo = await photoServices.getOne(photoId).lean();
+    const photo = await photoServices.getOne(photoId).populate('comments.user').lean();
 
-    const isOwner = req.user?._id == photo.owner._id
+    const isOwner = req.user?._id == photo.owner._id;
+
     res.render('photos/details', { photo, isOwner });
 
 });
@@ -49,7 +50,44 @@ router.get('/:photoId/delete', async (req, res) => {
         await photoServices.delete(photoId);
         res.redirect('/photos/catalog')
     } catch (error) {
-        res.render(`/photos/${photoId}/details`, {error: 'Unsuccessfull delete!'});
+        res.render(`photos/${photoId}/details`, { error: 'Unsuccessfull delete!' });
     }
-})
+});
+
+router.get('/:photoId/edit', async (req, res) => {
+
+    const photo = await photoServices.getOne(req.params.photoId).lean();
+
+    res.render('photos/edit', { photo });
+});
+
+router.post('/:photoId/edit', async (req, res) => {
+    const photoData = req.body;
+    const photoId = req.params.photoId;
+
+    try {
+        await photoServices.edit(photoId, photoData);
+
+        res.redirect(`/photos/${photoId}/details`);
+
+    } catch (error) {
+        res.render('photos/edit', { error: 'Unable to update', ...photoData })
+    }
+});
+
+router.post('/:photoId/comments', async (req, res) => {
+
+    const photoId = req.params.photoId;
+    const { message } = req.body;
+
+    const user = req.user._id;
+
+    try {
+        await photoServices.addComment(photoId, { user, message });
+        res.redirect(`/photos/${photoId}/details`);
+    } catch (error) {
+        console.log('try again')
+    }
+});
+
 module.exports = router;

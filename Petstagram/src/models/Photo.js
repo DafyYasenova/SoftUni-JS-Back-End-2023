@@ -26,6 +26,19 @@ const photoSchema =  new mongoose.Schema({
         required: true,
         ref: 'User', 
     },
+    comments: [
+        {
+            user: {
+                type: mongoose.Types.ObjectId,
+                required: [true, 'User required!'],
+                ref: 'User',
+            },
+            message: {
+                type: String,
+            required: [true, 'Comment message is required!'],
+        },
+        }
+    ]
 });
 
 const Photo = mongoose.model('Photo', photoSchema);
