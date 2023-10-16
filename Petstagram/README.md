@@ -88,3 +88,6 @@
 30. Modify catalog template and route in photoController
 31. Create getAll method for populate data
 32. Details page
+    - conditionality for text area for post comments
+33. Delete functionality
+34. Edit page
