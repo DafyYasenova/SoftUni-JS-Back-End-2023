@@ -9,12 +9,13 @@ const photoSchema =  new mongoose.Schema({
     image: {
         type: String,
         required: [true, 'ImageURL is required!'],
-        validate: {
-            validator(value){
-                return /^https?:\/\/.+$/.test(value);
-            },
-            message: 'Image should be start with http:// ot https://!'
-        }
+        // validate: {
+        //     validator(value){
+        //         return /^https?:\/\/.+$/.test(value);
+        //     },
+        //     message: 'Image should be start with http:// ot https://!'
+        // }
+        match: [/^https?:\/\//, 'Invalid URL!']
     },
     age: {
         type: Number,
