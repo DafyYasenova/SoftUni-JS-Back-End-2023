@@ -3,7 +3,7 @@ const router = require('express').Router();
 const photoServices = require('../services/photoServices'); // for profile 
 
 router.get('/', (req, res) => {
-    console.log(req.user)
+   // console.log(req.user)
     res.render('home')
 });
 
