@@ -41,7 +41,9 @@ router.get('/:cryptoId/details', async (req, res) => {
 
     const isOwner = req.user?._id == crypto.owner._id;
 
-    res.render('crypto/details', { crypto, isOwner });
+    //for buy:
+    const isBuyer = crypto.buyCrypto.some(id => id == req.user._id);
+    res.render('crypto/details', { crypto, isOwner, isBuyer });
 
 });
 
@@ -77,22 +79,14 @@ router.post('/:crypto/edit', isAuth, async (req, res) => {
     }
 });
 
+router.get('/:cryptoId/buy', isAuth, async (req, res) =>{
+    const cryptoId = req.params.cryptoId;
+
+    await cryptoService.buy(req.user._id, req.params.cryptoId);
+
+     res.redirect(`/crypto/${cryptoId}/details`);
+})
 
 
-
-// router.post('/:cryptoId/comments', isAuth, async (req, res) => {
-
-//     const cryptoId = req.params.cryptoId;
-//     const { message } = req.body;
-
-//     const user = req.user._id;
-
-//     try {
-//         await cryptoService.addComment(crypto, { user, message });
-//         res.redirect(`/crypto/${cryptoId}/details`);
-//     } catch (error) {
-//         res.render(`crypto/${cryptoId}/details`, { error: extractErrorMessage(error) })
-//     }
-// });
 
 module.exports = router;

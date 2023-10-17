@@ -11,11 +11,17 @@ exports.delete = (cryptoId) => Crypto.findByIdAndDelete(cryptoId);
 
 exports.edit = (cryptoId, cryptoData) => Crypto.findByIdAndUpdate(cryptoId, cryptoData);
 
-// exports.addComment = async (photoId, commentData) => {
-//     const photo = await Photo.findById(photoId);
-//     photo.comments.push(commentData);
-
-//     return photo.save();
-// };
 
 exports.getByOwner = (userId) => Crypto.find({owner: userId});
+
+// 1way:
+exports.buy =async  (userId, cryptoId) => {
+    const crypto = await Crypto.findById(cryptoId);
+    crypto.buyCrypto.push(userId);
+
+    return crypto.save();
+}
+//2way
+// exports.buy = async  (userId, cryptoId) => {
+//    await Crypto.findByIdAndUpdate(cryptoId, {$push: {buyCrypto: userId }})
+// }

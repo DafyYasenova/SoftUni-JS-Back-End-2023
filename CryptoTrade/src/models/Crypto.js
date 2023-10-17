@@ -30,10 +30,10 @@ const cryptoSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-    buyCrypto: {
-        type: [mongoose.Types.ObjectId],
+    buyCrypto: [{
+        type: mongoose.Types.ObjectId,
         ref: 'User',
-    }
+    }],
 });
 
 const Crypto = mongoose.model('Crypto', cryptoSchema);
