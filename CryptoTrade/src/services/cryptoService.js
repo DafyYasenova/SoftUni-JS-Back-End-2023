@@ -25,3 +25,17 @@ exports.buy =async  (userId, cryptoId) => {
 // exports.buy = async  (userId, cryptoId) => {
 //    await Crypto.findByIdAndUpdate(cryptoId, {$push: {buyCrypto: userId }})
 // }
+
+exports.search = async (name, paymentMethod) => {
+    let crypto = await this.getAll().lean();
+
+    if(name){
+        crypto =  crypto.filter(x => x.name.toLowerCase() == name);
+
+    }
+    if(paymentMethod){
+        crypto = crypto.filter(x => x.paymentMethod == paymentMethod)
+    }
+
+    return crypto;
+}
