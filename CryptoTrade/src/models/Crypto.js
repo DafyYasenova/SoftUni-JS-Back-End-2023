@@ -13,8 +13,8 @@ const cryptoSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: [true, 'Age is required!'],
-        minLength: [0, 'Price should be positive number!'],
+        required: [true, 'Price is required!'],
+        min: [0, 'Price should be positive number!'],
     },
     cryptoDescription: {
         type: String,

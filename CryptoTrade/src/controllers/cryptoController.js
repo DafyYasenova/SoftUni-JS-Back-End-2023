@@ -6,8 +6,6 @@ const { extractErrorMessage } = require('../utils/errorHelpers');
 const { isAuth } = require('../middlewares/authMiddleware');
 
 
-
-
 router.get('/create', isAuth, (req, res) => {
 
     res.render('crypto/create');
@@ -42,7 +40,7 @@ router.get('/:cryptoId/details', async (req, res) => {
     const isOwner = req.user?._id == crypto.owner._id;
 
     //for buy:
-    const isBuyer = crypto.buyCrypto?.some(id => id == req.user._id);
+    const isBuyer = crypto.buyCrypto?.some(id => id == req.user?._id);
     res.render('crypto/details', { crypto, isOwner, isBuyer });
 
 });
@@ -90,7 +88,7 @@ router.post('/:cryptoId/edit', isAuth, async (req, res) => {
         res.redirect(`/crypto/${cryptoId}/details`);
 
     } catch (error) {
-        
+
         res.render('crypto/edit', { error: 'Unable to update', ...cryptoData })
     }
 });
@@ -101,8 +99,17 @@ router.get('/:cryptoId/buy', isAuth, async (req, res) => {
     await cryptoService.buy(req.user._id, req.params.cryptoId);
 
     res.redirect(`/crypto/${cryptoId}/details`);
-})
+});
 
+router.get('/search', async (req, res) => {
+
+    const { name, paymentMethod } = req.query;
+    // console.log( req.query)
+    const crypto = await cryptoService.search(name, paymentMethod);
+
+
+    res.render('crypto/search', { crypto });
+})
 
 
 module.exports = router;

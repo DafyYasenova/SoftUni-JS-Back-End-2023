@@ -8,8 +8,8 @@ router.use(homeController);
 router.use('/users', userController);
 router.use('/crypto', cryptoController);
 
-// router.get('*', (req, res)=>{
-//     res.redirect('404');
-// })
+router.get('*', (req, res)=>{
+    res.redirect('/404');
+})
 
 module.exports = router;
