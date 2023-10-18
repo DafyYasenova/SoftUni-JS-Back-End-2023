@@ -30,7 +30,7 @@ exports.search = async (name, paymentMethod) => {
     let crypto = await this.getAll().lean();
 
     if(name){
-        crypto =  crypto.filter(x => x.name.toLowerCase() == name);
+        crypto =  crypto.filter(x => x.name.toLowerCase() == name.toLowerCase());
 
     }
     if(paymentMethod){
