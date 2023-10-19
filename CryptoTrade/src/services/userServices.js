@@ -34,7 +34,7 @@ exports.register = async (userData) => {
 
     return User.create(userData);
 
-    // if automatically login after register:
+  //  if automatically login after register:
     // const token = generateToken( await User.create(userData))
     // return token; // userController!
 }
