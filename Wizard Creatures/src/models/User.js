@@ -29,8 +29,6 @@ const userSchema = new mongoose.Schema({
 });
 
 
-
-
 userSchema.virtual('repeatPassword') //check repass name
     .set(function (value) {
         if (this.password !== value) {

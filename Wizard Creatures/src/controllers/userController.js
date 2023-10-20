@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
 
     try{
     const { firstName, lastName, email, password, repeatPassword } = req.body;
-  //  console.log(req.body)
+        //  console.log(req.body)
         //for only register:
         // await userServices.register({ firstName, lastName, email, password, repeatPassword});
         // res.redirect('/');

@@ -2,10 +2,7 @@ const jwt = require('../lib/jwt');
 const User = require('../models/User');
 const { SECRET } = require('../config/constans')
 
-
-
 const bcrypt = require('bcrypt');
-
 
 exports.login = async (email, password) => {
 
@@ -20,6 +17,8 @@ exports.login = async (email, password) => {
     if (!isValid) {
         throw new Error('Invalid user or password');
     }
+
+    
     // if must automatically login after register:
     const token = await generateToken(user);
     return token;
