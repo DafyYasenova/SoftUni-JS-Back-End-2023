@@ -5,6 +5,6 @@ const furnitureController = require('./controllers/furnitureController');
 
 
 router.use('/users', userController);
-router.use('/furnitures', furnitureController);
+router.use('/data/furnitures', furnitureController);
 
 module.exports = router;

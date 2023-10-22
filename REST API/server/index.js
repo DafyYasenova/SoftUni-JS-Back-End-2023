@@ -1,13 +1,30 @@
 const express = require('express');
 
+const cors = require('cors');
+
 const routes = require('./routes')
 const app = express();
+
+app.use(express.urlencoded({extended: false})); //for parse query strings
+
+app.use(express.json()); //for parse json data
+ 
+// app.use((req,res, next) =>{
+
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', '*');
+//     res.setHeader('Access-Control-Allow-Headers', '*');
+
+//     next();
+
+// }); 
+// 2 way: install cors
 
 app.get('/', (req, res) => {
 res.send('hello');
 
 });
 
-app.use('/data', routes);
+app.use(routes);
 
 app.listen(3030, () => console.log('RESTful server is listening on port 3030...'));
