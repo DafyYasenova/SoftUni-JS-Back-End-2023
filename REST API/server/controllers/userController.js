@@ -1,11 +1,33 @@
 const router = require('express').Router();
 
-router.post('/register', (req, res) =>{
+const userManager = require('../managers/userManager');
 
-const {email, password} = req.body;
+router.post('/register', async (req, res) => {
+    try {
 
-res.end();
+        const result = await userManager.register(req.body);
+        res.json(result);
+    } catch (error) {
+        res.status(400).json({
+            message: 'Error'
+        })
+    }
 
-}); 
+});
+
+
+router.post('/login', async (req, res) => {
+    try {
+        const result = await userManager.login(req.body);
+
+        res.json(result);
+
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+
+})
 
 module.exports = router;
